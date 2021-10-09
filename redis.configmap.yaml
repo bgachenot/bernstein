@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: redis-confmap
   namespace: default
-# data:
-#   ENV_VAR: env-variable
+data:
+  REDIS_HOST: redis-svc
