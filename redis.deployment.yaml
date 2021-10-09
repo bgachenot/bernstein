@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deploy
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      name: redis
+  replicas: 1 #Force to 1 pod, avoid being scalable throught the cli
+  template:
+    metadata:
+      labels:
+        name: redis
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: redis
+          image: redis:5.0
+          ports:
+            - containerPort: 6379
