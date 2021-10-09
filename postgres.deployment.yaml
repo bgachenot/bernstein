@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deploy
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      name: postgres
+  replicas: 1 #Force to 1 pod, avoid being scalable throught the cli
+  template:
+    metadata:
+      labels:
+        name: postgres
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: postgres
+          image: postgres:12
+          envFrom:
+            - secretRef:
+                name: postgres-credentials
+            - configMapRef:
+                name: postgres-confmap
+          ports:
+            - containerPort: 5432 #How to use value from environment variable??
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-pv
+      volumes:
+        - name: postgres-pv
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim
