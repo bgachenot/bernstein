@@ -4,6 +4,6 @@ metadata:
   name: postgres-confmap
   namespace: default
 data:
-  POSTGRES_HOST: "postgres-svc"
+  POSTGRES_HOST: postgres-svc
   POSTGRES_PORT: "5432"
-  POSTGRES_DB: "postgres"
+  POSTGRES_DB: postgres
