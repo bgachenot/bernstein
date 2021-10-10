@@ -6,14 +6,15 @@ metadata:
   namespace: default
   labels:
     type: local
+    app: postgres
 spec:
   storageClassName: manual
   capacity:
-    storage: 2G
+    storage: 2Gi
   accessModes:
     - ReadWriteOnce #Only one pod needs access
   hostPath:
-    path: "/var/lib/postgresql/data"
+    path: "/var/lib/postgresql"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -27,4 +28,4 @@ spec:
   - ReadWriteOnce #Only one pod needs access
   resources:
     requests:
-      storage: 2G
+      storage: 2Gi
