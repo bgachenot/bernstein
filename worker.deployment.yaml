@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-deploy
+  namespace: default
+spec:
+  replicas: 1 #Only one pod, avoid scaling throught cli
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: worker
+        image: epitechcontent/t-dop-600-worker:k8s
+        envFrom:
+            - secretRef:
+                name: postgres-credentials
+            - configMapRef:
+                name: postgres-confmap
+            - configMapRef:
+                name: redis-confmap
+        resources:
+          limits:
+            memory: "256Mi"
