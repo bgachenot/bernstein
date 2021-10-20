@@ -13,6 +13,16 @@ spec:
       labels:
         app: result
     spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: disktype
+                operator: In
+                values:
+                - ssd
       restartPolicy: Always
       containers:
       - name: result
@@ -22,8 +32,6 @@ spec:
               name: postgres-credentials
           - configMapRef:
               name: postgres-confmap
-          - configMapRef:
-              name: redis-confmap
         resources:
           limits:
             memory: "128Mi"
