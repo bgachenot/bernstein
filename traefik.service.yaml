@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik-svc
+  namespace: kube-public
+spec:
+  selector:
+    app: traefik
+  ports:
+  - name: http-proxy
+    port: 80
+    targetPort: 80
+    nodePort: 30021
+  - name: admin-dashboard
+    port: 8080
+    targetPort: 8080
+    nodePort: 30042
+  type: NodePort
