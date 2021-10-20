@@ -25,7 +25,7 @@ spec:
           ports:
             - containerPort: 5432 #How to use value from environment variable??
           volumeMounts:
-            - mountPath: /var/lib/postgresql/
+            - mountPath: /var/lib/postgresql/data
               name: postgres-pv
       volumes:
         - name: postgres-pv
