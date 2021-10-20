@@ -19,7 +19,7 @@ spec:
         image: epitechcontent/t-dop-600-poll:k8s
         resources:
           limits:
-            memory: "128Mi"
+            memory: "128M"
         envFrom:
           - configMapRef:
               name: redis-confmap
