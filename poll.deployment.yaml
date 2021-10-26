@@ -13,6 +13,16 @@ spec:
       labels:
         app: poll
     spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: team
+                operator: In
+                values:
+                - "4"
+            topologyKey: kubernetes.io/hostname
       restartPolicy: Always
       containers:
       - name: poll

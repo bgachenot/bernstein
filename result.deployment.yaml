@@ -14,15 +14,17 @@ spec:
         app: result
     spec:
       affinity:
-        nodeAffinity:
+        podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 1
-            preference:
-              matchExpressions:
-              - key: disktype
-                operator: In
-                values:
-                - ssd
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: security
+                  operator: In
+                  values:
+                  - S2
+              topologyKey: kubernetes.io/hostname
       restartPolicy: Always
       containers:
       - name: result

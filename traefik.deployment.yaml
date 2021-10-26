@@ -17,6 +17,16 @@ spec:
     spec:
       restartPolicy: Always
       serviceAccountName: traefik-service-account
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: team
+                operator: In
+                values:
+                - "4"
+            topologyKey: kubernetes.io/hostname
       containers:
       - name: traefik
         image: traefik:1.7
